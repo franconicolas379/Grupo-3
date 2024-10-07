@@ -2,6 +2,11 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 
+
+import Footer from "@/components/footer";
+import { CarritoProvider } from "./carrito/carritoContext";
+import Navigation from "../components/navigation";
+
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -26,9 +31,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased flex min-h-screen flex-col w-full`}
       >
-        {children}
+        <CarritoProvider>
+          <Navigation />
+          <main className="flex-grow flex items-center justify-center">
+            {children}
+          </main>
+          <Footer />
+        </CarritoProvider>
       </body>
     </html>
   );
